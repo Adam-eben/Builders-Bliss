@@ -165,7 +165,9 @@ function App() {
         return (
             <div>
               <Navbar balance = {cUSDBalance} />
-              <Materials materials ={materials}
+              <Materials 
+               owner={address}
+              materials ={materials}
               buyMaterial = {buyMaterial}
               SwitchForsale= {SwitchForsale}
                

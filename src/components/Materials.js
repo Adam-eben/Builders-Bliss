@@ -25,6 +25,7 @@ const Materials = (props) => {
                 <p class="card-quantity">Quantity:{material.quantity}</p>
                 <p className="card-text">
                   <small>
+                      
                     {material.forSale
                       ? "Available for sale"
                       : "Not Available for sale"}
@@ -32,15 +33,31 @@ const Materials = (props) => {
                 </p>
                 <p class="card-location">Location:{material.location}</p>
                 <p class="card-price">{material.price / 1000000000000000000}cUSD</p>
-
-                <button type="button" class="btn btn-outline-dark" onClick={() => props.buyMaterial(material.index)}>Buy Material</button>
-                <button  className="btn btn-dark" onClick={() => props.SwitchForsale(material.index)}
-                    >{material.forSale ? "Make Not For Sale" : "Make for sale"}
                  
-                </button>
+                   {/* Make this button visible to other users apart from the owner (only when it's available for sale) */}
+                   {props.owner !== material.creator && material.forSale && (
+                      <button
+                        type="button"
+                        class="btn btn-outline-dark"
+                        onClick={() => props.buyMaterial(material.index)}
+                      >
+                        Buy Material
+                      </button>
+                    )}
 
 
             </div>
+              {/* // Make button visible to only the creator  */}
+              {props.owner === material.creator && (
+                      <button
+                        className="btn btn-dark"
+                        onClick={() => props.SwitchForsale(material.index)}
+                      >
+                        {material.forSale
+                          ? "Make Not For Sale"
+                          : "Make for sale"}
+                      </button>
+                    )}
 
             </div>
 
